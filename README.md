@@ -24,14 +24,18 @@ A aplicação permite que o usuário consulte a previsão do tempo para uma cida
 ## Tecnologias usadas
 ------------------
 
-*   Node.js
-*   Express
-*   Axios
-*   dotenv
-*   Cors
-*   Jest
-*   Eslint
-*   Prettier
+* Node.js
+* Express
+* Axios
+* dotenv
+* Cors
+* Jest
+* Eslint
+* Prettier
+* Docker
+* GraphQL
+* express-graphql
+* graphql-request
 
 
 ## Como instalar e executar
@@ -64,7 +68,7 @@ npm install
 npm start
 ```
 
-Agora a aplicação estará rodando localmente na porta definida nas variáveis de ambiente, por padrão na porta 3000. Você pode acessar a rota `http://localhost:3000/api/weather?city=<nome-da-cidade>` para obter informações sobre a previsão do tempo da cidade especificada. Substitua `<nome-da-cidade>` pelo nome da cidade que você deseja pesquisar.
+Agora a aplicação estará rodando localmente na porta definida nas variáveis de ambiente, por padrão na porta 3000. Você pode acessar a rota `http://localhost:3000/graphql` para acessar a API GraphQL.
 
 Para executar os testes, execute o seguinte comando:
 
@@ -83,29 +87,36 @@ npm run lint
 --------------------
 
 ```java
-previsao-do-tempo/
+previsao-do-tempo-nodejs/
 ├── src/
 │   ├── controllers/
 │   │   └── weatherController.js
 │   ├── middlewares/
 │   │   └── errorHandler.js
 │   ├── routes/
-│   │   └── weatherRoutes.js
+│   │   └── graphql.js
 │   ├── services/
-│   │   └── weatherService.js
+│   │   ├── weatherService.js
+│   │   └── graphqlService.js
 │   ├── utils/
-│   │   └── apiClient.js
+│   │   ├── apiClient.js
+│   │   └── graphqlClient.js
 │   └── app.js
 ├── test/
-│   └── weatherService.test.js
+│   ├── weatherService.test.js
+│   └── graphqlService.test.js
+├── .dockerignore
 ├── .env.example
 ├── .gitignore
 ├── .prettierrc
+├── Dockerfile
 ├── package-lock.json
-└── package.json
+├── package.json
+├── schema.graphql
+└── README.md
 ```
 
-A pasta `src` contém o código da aplicação, dividido em controladores, rotas, serviços, middlewares e utilitários. A pasta `test` contém os testes unitários para o serviço de previsão do tempo. Os arquivos `.env.example`, `.gitignore`, `.prettierrc`, `package-lock.json` e `package.json` são arquivos de configuração para o projeto.
+A pasta `src` contém o código da aplicação, dividido em controladores, rotas, serviços, middlewares e utilitários. A pasta `test` contém os testes unitários para o serviço de previsão do tempo e para o serviço GraphQL. Os arquivos `.env.example`, `.dockerignore`, `.gitignore`, `.prettierrc`, `Dockerfile`, `package-lock.json`, `package.json`, `schema.graphql` e `README.md` são arquivos de configuração para o projeto.
 
 ### Controllers
 
@@ -137,6 +148,44 @@ As seguintes variáveis de ambiente devem ser definidas para executar a aplicaç
 *   `PORT`: A porta na qual a aplicação será executada. Por padrão, é 3000.
 
 
+## Docker
+
+O projeto está configurado para executar em um contêiner Docker. O arquivo `Dockerfile` define a imagem Docker e as instruções para criar o contêiner. Para executar a aplicação em um contêiner, siga estas etapas:
+
+1. Construa a imagem Docker:
+
+```bash
+docker build -t previsao-do-tempo-nodejs .
+```
+
+2. Execute o contêiner:
+
+```bash
+docker run -p 3000:3000 --env-file .env previsao-do-tempo-nodejs
+```
+
+Agora a aplicação estará rodando localmente em um contêiner Docker.
+
+
+## GraphQL
+
+O projeto foi atualizado para usar GraphQL como interface de API. A rota `/graphql` permite consultar a previsão do tempo para uma cidade específica. O schema GraphQL está definido no arquivo `schema.graphql`.
+
+Para testar a API GraphQL, você pode usar o GraphiQL, uma interface web para testar queries e mutations. Para acessar o GraphiQL, acesse a rota `http://localhost:3000/graphql`. Lá você pode testar as seguintes queries:
+
+```graphql
+query {
+  weather(city: "<nome-da-cidade>") {
+    temperature
+    feelsLike
+    humidity
+    pressure
+    description
+  }
+}
+```
+
+
 ## Testes
 ------
 
@@ -152,4 +201,4 @@ O linting do projeto usa o Eslint e o Prettier. O arquivo de configuração `.es
 ## Conclusão
 ---------
 
-Este projeto básico de previsão do tempo com Node.js no backend está completo. Ele inclui a implementação de rotas, consumo de API de previsão do tempo, tratamento de erros, testes unitários e documentação. Você pode continuar melhorando o projeto conforme suas necessidades, como adicionar novos recursos, melhorar a documentação, ou implementar um frontend para exibir os dados de forma mais amigável ao usuário.
+Este projeto básico de previsão do tempo com Node.js no backend foi atualizado para suportar Docker e GraphQL. Ele inclui a implementação de rotas, consumo de API de previsão do tempo, tratamento de erros, testes unitários e documentação. Você pode continuar melhorando o projeto conforme suas necessidades, como adicionar novos recursos, melhorar a documentação, ou implementar um frontend para exibir os dados de forma mais amigável ao usuário.
