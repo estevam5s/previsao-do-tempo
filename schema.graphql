@@ -1,0 +1,20 @@
+type Weather {
+  temperature: Float!
+  feelsLike: Float!
+  humidity: Int!
+  pressure: Int!
+  description: String!
+}
+
+type Query {
+  weather(city: String!): Weather!
+}
+
+type Mutation {
+  updateApiKey(apiKey: String!): String!
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+}
