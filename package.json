@@ -1,0 +1,33 @@
+{
+  "name": "previsao-do-tempo",
+  "version": "1.0.0",
+  "description": "Aplicação para consumir a API de previsão do tempo e exibir as informações de forma amigável ao usuário",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "nodemon src/app.js",
+    "test": "jest",
+    "lint": "eslint --ext .js src/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your_username/previsao-do-tempo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/your_username/previsao-do-tempo/issues"
+  },
+  "homepage": "https://github.com/your_username/previsao-do-tempo#readme",
+  "dependencies": {
+    "axios": "^0.26.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3"
+  },
+  "devDependencies": {
+    "eslint": "^8.15.0",
+    "jest": "^27.5.1",
+    "nodemon": "^2.1.2",
+    "prettier": "^2.6.2"
+  }
+}
