@@ -1,0 +1,4 @@
+{"level":"error","message":"Error fetching weather data: Request failed with status code 403","service":"weather-service","timestamp":"2024-01-24 22:28:07"}
+{"level":"error","message":"Error fetching weather data: Request failed with status code 403","service":"weather-service","timestamp":"2024-01-24 22:28:18"}
+{"level":"error","message":"Error fetching weather data: Request failed with status code 403","service":"weather-service","timestamp":"2024-01-25 05:59:38"}
+{"level":"error","message":"Error fetching weather data: Request failed with status code 403","service":"weather-service","timestamp":"2024-01-25 05:59:41"}
